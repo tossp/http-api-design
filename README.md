@@ -26,7 +26,7 @@ We welcome [contributions](CONTRIBUTING.md) to this guide.
 *  [Accept serialized JSON in request bodies](#accept-serialized-json-in-request-bodies)
 *  [Provide resource (UU)IDs](#provide-resource-uuids)
 *  [Provide standard timestamps](#provide-standard-timestamps)
-*  [Use UTC times formatted in ISO8601](#use-utc-times-formatted-in-ISO8601)
+*  [Use UTC times formatted in ISO8601](#use-utc-times-formatted-in-iso8601)
 *  [Use consistent path formats](#use-consistent-path-formats)
 *  [Downcase paths and attributes](#downcase-paths-and-attributes)
 *  [Nest foreign key relations](#nest-foreign-key-relations)
@@ -41,7 +41,7 @@ We welcome [contributions](CONTRIBUTING.md) to this guide.
 *  [Provide human-readable docs](#provide-human-readable-docs)
 *  [Provide executable examples](#provide-executable-examples)
 *  [Describe stability](#describe-stability)
-*  [Require SSL](#require-ssl)
+*  [Require TLS](#require-tls)
 *  [Pretty-print JSON by default](#pretty-print-json-by-default)
 
 ### Return appropriate status codes
@@ -83,7 +83,7 @@ Content-Type: application/json;charset=utf-8
 }
 ```
 
-202 and 204 responses will not include the full resource representation,
+202 responses will not include the full resource representation,
 e.g.:
 
 ```
@@ -133,7 +133,7 @@ Render UUIDs in downcased `8-4-4-4-12` format, e.g.:
 
 ### Provide standard timestamps
 
-Provide created_at and updated_at timestamps for resources by default,
+Provide `created_at` and `updated_at` timestamps for resources by default,
 e.g:
 
 ```json
@@ -158,6 +158,12 @@ e.g.:
 ```
 
 ### Use consistent path formats
+
+#### Resource names
+
+Use the plural version of a resource name unless the resource in question is a singleton within the system (for example, in most systems a given user would only ever have one account). This keeps it consistent in the way you refer to particular resources.
+
+#### Actions
 
 Prefer endpoint layouts that don’t need any special actions for
 individual resources. In cases where special actions are needed, place
@@ -187,7 +193,7 @@ Downcase attributes as well, but use underscore separators so that
 attribute names can be typed without quotes in JavaScript, e.g.:
 
 ```
-"service_class": "first"
+service_class: "first"
 ```
 
 ### Nest foreign key relations
@@ -384,11 +390,11 @@ backwards incompatible changes within that API version. If you need to
 make backwards-incompatible changes, create a new API with an
 incremented version number.
 
-### Require SSL
+### Require TLS
 
-Require SSL to access the API, without exception. It’s not worth trying
-to figure out or explain when it is OK to use SSL and when it’s not.
-Just require SSL for everything.
+Require TLS to access the API, without exception. It’s not worth trying
+to figure out or explain when it is OK to use TLS and when it’s not.
+Just require TLS for everything.
 
 ### Pretty-print JSON by default
 
